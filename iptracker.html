@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Tracker</title>
+</head>
+<body>
+    <h1>IP Tracker</h1>
+    <p>Twój adres IP: <span id="ipAddress"></span></p>
+
+    <script>
+        // Skrypt JavaScript do pobrania adresu IP
+        // To jest tylko przykład - nie będzie działać lokalnie bez odpowiedniej konfiguracji
+
+        // Funkcja do pobierania adresu IP za pomocą zewnętrznego serwera (np. API)
+        async function fetchIpAddress() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.error('Błąd podczas pobierania adresu IP:', error);
+                return 'Nie można pobrać adresu IP';
+            }
+        }
+
+        // Aktualizacja zawartości strony po pobraniu adresu IP
+        async function updateIpAddress() {
+            const ipAddressElement = document.getElementById('ipAddress');
+            const ipAddress = await fetchIpAddress();
+            ipAddressElement.textContent = ipAddress;
+        }
+
+        // Wywołanie funkcji przy ładowaniu strony
+        updateIpAddress();
+    </script>
+</body>
+</html>
